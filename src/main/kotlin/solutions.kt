@@ -41,3 +41,21 @@ fun getSolution22(): Int {
     }
     return validCount
 }
+
+fun getSolution31(): Int {
+    var counter = 0
+    var position = 0
+    val data = getDataForDay3()
+    val lineSize = data[0].length
+
+    data.forEach {
+        if (it[position] == '#')
+            counter++
+
+        position += 3
+        if (position >= lineSize)
+            position -= lineSize
+    }
+
+    return counter
+}

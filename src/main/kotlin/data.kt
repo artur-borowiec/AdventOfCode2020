@@ -2,6 +2,7 @@ import java.io.File
 
 const val DAY1_INPUT = "src/main/resources/input1.txt"
 const val DAY2_INPUT = "src/main/resources/input2.txt"
+const val DAY3_INPUT = "src/main/resources/input3"
 
 fun getDataForDay1(): List<Int> {
     val data = mutableListOf<Int>()
@@ -24,6 +25,15 @@ fun getDataForDay2(): List<Password> {
             char,
             split[2]
         ))
+    }
+
+    return data
+}
+
+fun getDataForDay3(): List<String> {
+    val data = mutableListOf<String>()
+    File(DAY3_INPUT).forEachLine {
+        data.add(it)
     }
 
     return data
