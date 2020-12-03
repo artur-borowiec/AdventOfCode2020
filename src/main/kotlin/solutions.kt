@@ -59,3 +59,34 @@ fun getSolution31(): Int {
 
     return counter
 }
+
+fun getSolution32(): Int {
+    var counter: Int
+    var position: Int
+    val data = getDataForDay3()
+    val lineSize = data[0].length
+    val params = listOf(Pair(1,1), Pair(3,1), Pair(5,1), Pair(7,1), Pair(1,2))
+
+    var score = 0
+
+    params.forEach { param ->
+        counter = 0
+        position = 0
+        data.forEachIndexed { index, line ->
+            if (index % param.second == 0) {
+                if (line[position] == '#')
+                    counter++
+
+                position += param.first
+                if (position >= lineSize)
+                    position -= lineSize
+            }
+        }
+        if (score == 0)
+            score = counter
+        else
+            score *= counter
+    }
+
+    return score
+}
