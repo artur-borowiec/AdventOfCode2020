@@ -107,5 +107,15 @@ fun getSolution42(): Int {
     var counter = 0
     val data = getDataForDay4()
 
+    data.forEach { passport ->
+        run {
+            var valid = checkIfContainsAllFields(passport)
+            passport.split(" ").forEach { field ->
+                if (!validateField(field)) valid = false
+            }
+            if (valid) counter++
+        }
+    }
+
     return counter
 }

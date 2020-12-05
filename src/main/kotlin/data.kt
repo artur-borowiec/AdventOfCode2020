@@ -48,7 +48,7 @@ fun getDataForDay4(): List<String> {
             data.add(tempLine)
             tempLine = ""
         } else {
-            tempLine += it
+            tempLine += " $it"
         }
     }
     data.add(tempLine)

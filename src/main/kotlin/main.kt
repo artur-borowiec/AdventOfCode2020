@@ -1,5 +1,5 @@
 const val SUM = 2020
-val CURRENT_TASK = Task.DAY4PART1
+val CURRENT_TASK = Task.DAY4PART2
 
 fun main() {
     printSolution()
