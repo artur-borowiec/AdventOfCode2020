@@ -42,3 +42,42 @@ fun validateField(s: String): Boolean =
         else -> true
     }
 
+fun getSeatIds(): MutableList<Int> {
+    val data = getDataForDay5()
+    val ids = mutableListOf<Int>()
+
+    data.forEach {
+        var half = 64
+        var rowL = 0
+        var rowH = 127
+
+        for (c in 0..5) {
+            when (it[c]) {
+                'F' -> rowH -= half
+                'B' -> rowL += half
+            }
+            half /= 2
+        }
+
+        var id = if (it[6] == 'F') rowL * 8 else rowH * 8
+
+
+        var half2 = 4
+        var seatL = 0
+        var seatH = 7
+        for (c in 7..8) {
+            when (it[c]) {
+                'L' -> seatH -= half2
+                'R' -> seatL += half2
+            }
+            half2 /= 2
+        }
+
+        id += if (it[9] == 'L') seatL else seatH
+
+        ids.add(id)
+        println("$it $id")
+    }
+
+    return ids
+}
