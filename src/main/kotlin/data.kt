@@ -4,6 +4,8 @@ const val DAY1_INPUT = "src/main/resources/input1.txt"
 const val DAY2_INPUT = "src/main/resources/input2.txt"
 const val DAY3_INPUT = "src/main/resources/input3"
 const val DAY4_INPUT = "src/main/resources/input4"
+const val DAY5_INPUT = "src/main/resources/input5"
+
 
 fun getDataForDay1(): List<Int> {
     val data = mutableListOf<Int>()
@@ -52,6 +54,15 @@ fun getDataForDay4(): List<String> {
         }
     }
     data.add(tempLine)
+
+    return data
+}
+
+fun getDataForDay5(): List<String> {
+    val data = mutableListOf<String>()
+    File(DAY5_INPUT).forEachLine {
+        data.add(it)
+    }
 
     return data
 }

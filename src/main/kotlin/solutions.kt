@@ -1,8 +1,10 @@
+import kotlin.math.abs
+
 fun getSolution11(): Int {
     val data = getDataForDay1()
     data.forEach {
-        if (data.contains(SUM - it))
-            return (SUM - it) * it
+        if (data.contains(2020 - it))
+            return (2020 - it) * it
     }
 
     return -1
@@ -13,8 +15,8 @@ fun getSolution12(): Int {
     data.forEachIndexed { i1, el1 ->
         data.forEachIndexed { i2, el2 ->
             if (i2 > i1) {
-                if (data.contains(SUM - (el1 + el2)))
-                    return el1 * el2 * (SUM-el1-el2)
+                if (data.contains(2020 - (el1 + el2)))
+                    return el1 * el2 * (2020 - el1 - el2)
             }
         }
     }
@@ -65,7 +67,7 @@ fun getSolution32(): Int {
     var position: Int
     val data = getDataForDay3()
     val lineSize = data[0].length
-    val params = listOf(Pair(1,1), Pair(3,1), Pair(5,1), Pair(7,1), Pair(1,2))
+    val params = listOf(Pair(1, 1), Pair(3, 1), Pair(5, 1), Pair(7, 1), Pair(1, 2))
 
     var score = 0
 
@@ -118,4 +120,88 @@ fun getSolution42(): Int {
     }
 
     return counter
+}
+
+fun getSolution51(): Int? {
+    val data = getDataForDay5()
+    val ids = mutableListOf<Int>()
+
+    data.forEach {
+        var half = 64
+        var rowL = 0
+        var rowH = 127
+
+        for (c in 0..5) {
+            when (it[c]) {
+                'F' -> rowH -= half
+                'B' -> rowL += half
+            }
+            half /= 2
+        }
+
+        var id = if (it[6] == 'F') rowL * 8 else rowH * 8
+
+
+        var half2 = 4
+        var seatL = 0
+        var seatH = 7
+        for (c in 7..8) {
+            when (it[c]) {
+                'L' -> seatH -= half2
+                'R' -> seatL += half2
+            }
+            half2 /= 2
+        }
+
+        id += if (it[9] == 'L') seatL else seatH
+
+        ids.add(id)
+        println("$it $id")
+    }
+    return ids.maxOrNull()
+}
+
+fun getSolution52(): Int {
+    val data = getDataForDay5()
+    val ids = mutableListOf<Int>()
+
+    data.forEach {
+        var half = 64
+        var rowL = 0
+        var rowH = 127
+
+        for (c in 0..5) {
+            when (it[c]) {
+                'F' -> rowH -= half
+                'B' -> rowL += half
+            }
+            half /= 2
+        }
+
+        var id = if (it[6] == 'F') rowL * 8 else rowH * 8
+
+
+        var half2 = 4
+        var seatL = 0
+        var seatH = 7
+        for (c in 7..8) {
+            when (it[c]) {
+                'L' -> seatH -= half2
+                'R' -> seatL += half2
+            }
+            half2 /= 2
+        }
+
+        id += if (it[9] == 'L') seatL else seatH
+
+        ids.add(id)
+    }
+    ids.sort()
+    val diff = ids[0]
+    ids.forEachIndexed { index, element ->
+        if (element != diff + index) {
+            return element-1
+        }
+    }
+    return -1
 }
