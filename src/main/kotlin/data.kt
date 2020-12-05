@@ -3,6 +3,7 @@ import java.io.File
 const val DAY1_INPUT = "src/main/resources/input1.txt"
 const val DAY2_INPUT = "src/main/resources/input2.txt"
 const val DAY3_INPUT = "src/main/resources/input3"
+const val DAY4_INPUT = "src/main/resources/input4"
 
 fun getDataForDay1(): List<Int> {
     val data = mutableListOf<Int>()
@@ -35,6 +36,22 @@ fun getDataForDay3(): List<String> {
     File(DAY3_INPUT).forEachLine {
         data.add(it)
     }
+
+    return data
+}
+
+fun getDataForDay4(): List<String> {
+    val data = mutableListOf<String>()
+    var tempLine = ""
+    File(DAY4_INPUT).forEachLine {
+        if (it.isBlank()) {
+            data.add(tempLine)
+            tempLine = ""
+        } else {
+            tempLine += it
+        }
+    }
+    data.add(tempLine)
 
     return data
 }

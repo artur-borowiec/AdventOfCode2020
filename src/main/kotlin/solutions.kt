@@ -90,3 +90,22 @@ fun getSolution32(): Int {
 
     return score
 }
+
+fun getSolution41(): Int {
+    var counter = 0
+    val data = getDataForDay4()
+
+    data.forEach {
+        if (checkIfContainsAllFields(it))
+            counter++
+    }
+
+    return counter
+}
+
+fun getSolution42(): Int {
+    var counter = 0
+    val data = getDataForDay4()
+
+    return counter
+}
