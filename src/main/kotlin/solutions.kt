@@ -130,8 +130,37 @@ fun getSolution52(): Int {
     val diff = ids[0]
     ids.forEachIndexed { index, element ->
         if (element != diff + index) {
-            return element-1
+            return element - 1
         }
     }
     return -1
+}
+
+fun getSolution61(): Int {
+    val data = getDataForDay6()
+    var score = 0
+    data.forEach {
+        val s = it.replace(" ", "")
+        score += s.toCharArray().toMutableSet().size
+    }
+
+    return score
+}
+
+fun getSolution62(): Int {
+    val data = getDataForDay6()
+    var score = 0
+    data.forEach {
+        val groups = it.trim().split(" ")
+        groups[0].toCharArray().forEach { ch ->
+            var allContain = true
+            groups.forEach { group ->
+                if(!group.contains(ch))
+                    allContain = false
+            }
+            if (allContain) score += 1
+        }
+    }
+
+    return score
 }

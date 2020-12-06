@@ -72,7 +72,7 @@ fun getSeatIds(): MutableList<Int> {
             }
             half2 /= 2
         }
-
+ 
         id += if (it[9] == 'L') seatL else seatH
 
         ids.add(id)
