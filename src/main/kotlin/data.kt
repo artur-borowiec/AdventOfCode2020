@@ -6,6 +6,8 @@ const val DAY3_INPUT = "src/main/resources/input3"
 const val DAY4_INPUT = "src/main/resources/input4"
 const val DAY5_INPUT = "src/main/resources/input5"
 const val DAY6_INPUT = "src/main/resources/input6"
+const val DAY7_INPUT = "src/main/resources/input7"
+const val DAY8_INPUT = "src/main/resources/input8"
 
 fun getDataForDay1(): List<Int> {
     val data = mutableListOf<Int>()
@@ -83,6 +85,37 @@ fun getDataForDay6(): List<String> {
     return data
 }
 
+fun getDataForDay7(): List<Bag> {
+    val data = mutableListOf<Bag>()
+    File(DAY7_INPUT).forEachLine {
+        val bag = Bag(it.split("bags contain")[0].trim(), mutableListOf())
+        val inside = it.split("bags contain")[1]
+        val bags = inside.split(", ")
+        bags.forEach { insideBag ->
+            bag.inside.add(insideBag
+                .replace("bags.", "")
+                .replace("bags", "")
+                .replace("bag.", "")
+                .replace("bag", "")
+                .trim()
+            )
+        }
+        println("$bag ${bag.hasNoBagsInside()}")
+        data.add(bag)
+    }
+
+    return data
+}
+
+fun getDataForDay8(): List<String> {
+    val data = mutableListOf<String>()
+    File(DAY8_INPUT).forEachLine {
+        data.add(it)
+    }
+
+    return data
+}
+
 data class Password(
     val p1: Int,
     val p2: Int,
@@ -92,3 +125,23 @@ data class Password(
     fun isValid(): Boolean = password.count { it == char } in p1..p2
     fun isValidNew(): Boolean = (password[p1-1] == char) xor (password[p2-1] == char)
 }
+
+data class Bag(
+    val color: String,
+    val inside: MutableList<String>
+) {
+    fun hasNoBagsInside() = inside[0].contains("no other")
+
+    fun getBagsCount(): Int {
+        if (hasNoBagsInside()) return 0
+        var count = 0
+        inside.forEach {
+            println(it.split(" ")[0].toInt())
+            count += it.split(" ")[0].toInt()
+        }
+        return count
+    }
+
+}
+
+fun List<Bag>.getBag(color: String): Bag = this.filter { it.color == color }[0]

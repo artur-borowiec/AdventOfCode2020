@@ -1,4 +1,4 @@
-val CURRENT_TASK = Task.DAY6PART2
+val CURRENT_TASK = Task.DAY8PART2
 
 fun main() {
     printSolution()
@@ -19,6 +19,10 @@ fun printSolution() {
             Task.DAY5PART2 -> getSolution52()
             Task.DAY6PART1 -> getSolution61()
             Task.DAY6PART2 -> getSolution62()
+            Task.DAY7PART1 -> getSolution71()
+            Task.DAY7PART2 -> getSolution72()
+            Task.DAY8PART1 -> getSolution81()
+            Task.DAY8PART2 -> getSolution82()
         }}"
     )
 }
@@ -29,5 +33,7 @@ enum class Task {
     DAY3PART1, DAY3PART2,
     DAY4PART1, DAY4PART2,
     DAY5PART1, DAY5PART2,
-    DAY6PART1, DAY6PART2
+    DAY6PART1, DAY6PART2,
+    DAY7PART1, DAY7PART2,
+    DAY8PART1, DAY8PART2
 }

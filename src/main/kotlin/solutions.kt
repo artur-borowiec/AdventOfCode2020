@@ -1,5 +1,3 @@
-import kotlin.math.abs
-
 fun getSolution11(): Int {
     val data = getDataForDay1()
     data.forEach {
@@ -164,3 +162,108 @@ fun getSolution62(): Int {
 
     return score
 }
+
+fun getSolution71(): Int {
+    val data = getDataForDay7()
+    val resultSet = mutableSetOf<String>()
+    val colorList = mutableListOf("shiny gold")
+    val resultList = mutableListOf<String>()
+
+    while (colorList.isNotEmpty()) {
+        colorList.forEach { color ->
+            data.forEach { bag ->
+                bag.inside.forEach {
+                    if(it.contains(color)) {
+                        resultList.add(bag.color)
+                        println(bag.color)
+                    }
+                }
+            }
+        }
+        resultSet.addAll(resultList)
+        colorList.clear()
+        colorList.addAll(resultList)
+        resultList.clear()
+    }
+
+    return resultSet.size
+}
+
+fun getSolution72(): Int {
+    return 0
+}
+
+fun getSolution81(): Int {
+    val data = getDataForDay8()
+    val alreadyRan = mutableSetOf<Int>()
+    var acc = 0
+    var current = 0
+
+    while (!alreadyRan.contains(current)) {
+        when {
+            data[current].contains("nop") -> {
+                alreadyRan.add(current)
+                current++
+            }
+            data[current].contains("jmp") -> {
+                alreadyRan.add(current)
+                current += data[current].split(" ")[1].toInt()
+            }
+            data[current].contains("acc") -> {
+                alreadyRan.add(current)
+                acc += data[current].split(" ")[1].toInt()
+                current++
+            }
+        }
+    }
+    return acc
+}
+
+// ugly but works
+fun getSolution82(): Int {
+    val data = getDataForDay8()
+    val alreadyRan = mutableSetOf<Int>()
+    var acc: Int
+    var current: Int
+
+    // nop/jmp lines numbers
+    val positions = mutableListOf<Int>()
+    data.forEachIndexed { index, s ->
+        run {
+            if (s.contains("nop") || s.contains("jmp"))
+                positions.add(index)
+        }
+    }
+
+    positions.forEach {
+        val editedData = mutableListOf<String>()
+        acc = 0
+        current = 0
+        alreadyRan.clear()
+        editedData.addAll(data)
+        editedData[it] = editedData[it].swapp()
+
+        while (!alreadyRan.contains(current)) {
+            if (current>=editedData.size)
+                return acc
+            when {
+                editedData[current].contains("nop") -> {
+                    alreadyRan.add(current)
+                    current++
+                }
+                editedData[current].contains("jmp") -> {
+                    alreadyRan.add(current)
+                    current += editedData[current].split(" ")[1].toInt()
+                }
+                editedData[current].contains("acc") -> {
+                    alreadyRan.add(current)
+                    acc += editedData[current].split(" ")[1].toInt()
+                    current++
+                }
+            }
+        }
+    }
+    return -1
+}
+
+
