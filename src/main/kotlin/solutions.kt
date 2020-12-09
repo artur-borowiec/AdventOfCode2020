@@ -266,4 +266,51 @@ fun getSolution82(): Int {
     return -1
 }
 
+fun getSolution91(): Long {
+    val data = getDataForDay9()
+    val nums = mutableListOf<Long>()
+    val preamLength = 25
 
+    data.forEach {
+        if (nums.size < preamLength)
+            nums.add(it)
+        else {
+            println(nums)
+            println(it)
+            var found = false
+            nums.forEach { num ->
+                val second = it-num
+                if (nums.contains(second) && second!=it)
+                    found = true
+            }
+            if (!found) return it
+            nums.removeAt(0)
+            nums.add(it)
+        }
+    }
+
+    return -1
+}
+
+fun getSolution92(): Long {
+    val data = getDataForDay9()
+    val invNumber = 22477624L
+    val contList = mutableListOf<Long>()
+
+    data.forEachIndexed { i, _ ->
+        var tempSum = 0L
+        var position = i
+        contList.clear()
+
+        while (tempSum < invNumber) {
+            tempSum += data[position]
+            contList.add(data[position])
+            position++
+
+            if (tempSum == invNumber)
+                return contList.maxOrNull()?.plus(contList.min() ?: -1) ?: -1
+        }
+    }
+
+    return 0L
+}

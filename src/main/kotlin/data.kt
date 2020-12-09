@@ -8,6 +8,7 @@ const val DAY5_INPUT = "src/main/resources/input5"
 const val DAY6_INPUT = "src/main/resources/input6"
 const val DAY7_INPUT = "src/main/resources/input7"
 const val DAY8_INPUT = "src/main/resources/input8"
+const val DAY9_INPUT = "src/main/resources/input9"
 
 fun getDataForDay1(): List<Int> {
     val data = mutableListOf<Int>()
@@ -111,6 +112,15 @@ fun getDataForDay8(): List<String> {
     val data = mutableListOf<String>()
     File(DAY8_INPUT).forEachLine {
         data.add(it)
+    }
+
+    return data
+}
+
+fun getDataForDay9(): List<Long> {
+    val data = mutableListOf<Long>()
+    File(DAY9_INPUT).forEachLine {
+        data.add(it.toLong())
     }
 
     return data
